@@ -1,8 +1,16 @@
-import express from 'express';
+import express from 'express'
 
-const app = express();
-const PORT: string = '3000';
+import textsRoutes from './routes/texts'
 
-app.use(express.json());
+const app = express()
+const PORT: string = '3000'
 
-app.listen(PORT, () => console.log(`Run in port ${PORT}`));
+app.locals.storageText = []
+
+app.use(express.json())
+
+app.use('/add-text', textsRoutes)
+
+app.listen(PORT, () => console.log(`Run in port ${PORT}`))
+
+export default app
