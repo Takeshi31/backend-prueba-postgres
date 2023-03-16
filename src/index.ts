@@ -11,6 +11,6 @@ app.use(express.json())
 
 app.use('/add-text', textsRoutes)
 
-app.listen(PORT, () => console.log(`Run in port ${PORT}`))
+app.listen(PORT, () => { })
 
 export default app
