@@ -7,6 +7,10 @@ interface Input {
   size: number
 }
 
+interface DeleteText {
+  id: string
+}
+
 export class TextController {
   private readonly textStorage: TextStorage
 
@@ -19,5 +23,12 @@ export class TextController {
 
     const response = await this.textStorage.addText(text, page, size)
     res.send(response)
+  }
+
+  async deleteText (req: Request<DeleteText, {}, {}, {}>, res: Response): Promise<void> {
+    const { id } = req.params
+    console.log(`ID => ${id}`)
+    const result = await this.textStorage.delete(id)
+    res.send(result)
   }
 }

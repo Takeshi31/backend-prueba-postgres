@@ -34,11 +34,10 @@ export class TextStorage {
     try {
       const texts = await Text.find({
         order: { id: 'DESC' },
-        select: ['text', 'date'],
+        select: ['id', 'text', 'date'],
         skip: (pageNumber - 1) * pageSize,
         take: pageSize
       })
-      console.log(`GET: ${JSON.stringify(texts)}`)
       return texts
     } catch (error) {
       if (error instanceof Error) {
@@ -47,5 +46,19 @@ export class TextStorage {
     }
     // @TODO: Old logic
     // return this.storageText
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  async delete (id: string): Promise<(ITextInput[] | IError | undefined)> {
+    try {
+      await Text.delete({ id: parseInt(id) })
+      const result = await this.getAllTexts(1, 10)
+      console.log(`RESULT: ${JSON.stringify(result)}`)
+      return result
+    } catch (error) {
+      if (error instanceof Error) {
+        return { message: error.message, code: 500 }
+      }
+    }
   }
 }
