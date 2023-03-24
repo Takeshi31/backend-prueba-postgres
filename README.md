@@ -15,16 +15,19 @@ Antes de comenzar a trabajar con este proyecto, asegúrate de tener instalado:
 
   ```bash
   git clone https://github.com/Takeshi31/backend-prueba-talenta.git
+  ```
 
 2. Entra en la carpeta del proyecto:
 
   ```bash
   cd backend-prueba-talenta
+  ```
 
 3. Instala las dependencias del proyecto:
 
   ```bash
   npm install
+  ```
 
 ## Instrucciones de instalación
 
@@ -49,11 +52,13 @@ El servidor se ejecutará en `http://localhost:3000`.
 
 Para ejecutar las pruebas unitarias, debes utilizar el siguiente comando:
   
+  ```bash
   npm run test
-
+  ```
 
 ### Ejecutar el linter
 Para ejecutar el linter `ts-standard`, debes utilizar el siguiente comando:
 
-```bash
-npm run lint
+  ```bash
+  npm run lint
+  ```

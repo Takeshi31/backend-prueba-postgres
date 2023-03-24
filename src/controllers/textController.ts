@@ -3,6 +3,8 @@ import { TextStorage } from '../repositories/textStorage'
 
 interface Input {
   text: string
+  page: number
+  size: number
 }
 
 export class TextController {
@@ -12,10 +14,10 @@ export class TextController {
     this.textStorage = textStorage
   }
 
-  public addText (req: Request<{}, {}, {}, Input>, res: Response): void {
-    const { text } = req.query
+  async addText (req: Request<{}, {}, {}, Input>, res: Response): Promise<void> {
+    const { text, page, size } = req.query
 
-    this.textStorage.addText(text)
-    res.send(this.textStorage)
+    const response = await this.textStorage.addText(text, page, size)
+    res.send(response)
   }
 }
