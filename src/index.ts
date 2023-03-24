@@ -22,5 +22,7 @@ async function main () {
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.get('/add-text', textController.addText.bind(textController))
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+app.delete('/delete-text/:id', textController.deleteText.bind(textController))
 
 void main()
