@@ -3,22 +3,22 @@ import { ITextInput } from '../interfaces/textInput.interface'
 import Text from '../config/entities/text'
 
 export class TextStorage {
-  async addText (text: string, pageNumber: number = 1, pageSize: number = 10): Promise<ITextInput[] | IError | undefined> {
+  async addText (text: string, pageNumber: number = 1, pageSize: number = 10): Promise<ITextInput[] | IError> {
     try {
       const textEntity = new Text()
-
       textEntity.text = text
       textEntity.date = new Date().toLocaleString()
+
       await textEntity.save()
-      const result = await this.getAllTexts(pageNumber, pageSize)
-      console.log(textEntity)
-      return result
+
+      return await this.getAllTexts(pageNumber, pageSize)
     } catch (error) {
       if (error instanceof Error) {
         return { message: error.message, code: 500 }
       }
-    }
 
+      return { message: 'Unknown error occurred', code: 500 }
+    }
     // @TODO: Old logic
     // const newTextInput: ITextInput = {
     //   text,
@@ -27,10 +27,7 @@ export class TextStorage {
     // this.storageText.push(newTextInput)
   }
 
-  // TODO: For test
-  async getAllTexts (pNumber: number, pSize: number): Promise<(ITextInput[] | IError | undefined)> {
-    const pageNumber: number = pNumber
-    const pageSize: number = pSize
+  async getAllTexts (pageNumber: number, pageSize: number): Promise<ITextInput[] | IError> {
     try {
       const texts = await Text.find({
         order: { id: 'DESC' },
@@ -38,27 +35,28 @@ export class TextStorage {
         skip: (pageNumber - 1) * pageSize,
         take: pageSize
       })
+
       return texts
     } catch (error) {
       if (error instanceof Error) {
         return { message: error.message, code: 500 }
       }
+      return { message: 'Unknown error occurred', code: 500 }
     }
     // @TODO: Old logic
     // return this.storageText
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  async delete (id: string): Promise<(ITextInput[] | IError | undefined)> {
+  async delete (id: string): Promise<ITextInput[] | IError> {
     try {
       await Text.delete({ id: parseInt(id) })
-      const result = await this.getAllTexts(1, 10)
-      console.log(`RESULT: ${JSON.stringify(result)}`)
-      return result
+      return await this.getAllTexts(1, 10)
     } catch (error) {
       if (error instanceof Error) {
         return { message: error.message, code: 500 }
       }
+      return { message: 'Unknown error occurred', code: 500 }
     }
   }
 }

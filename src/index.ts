@@ -1,4 +1,6 @@
 import 'reflect-metadata'
+import swaggerUi from 'swagger-ui-express'
+import yaml from 'yamljs'
 import app from './app'
 
 import { TextController } from './controllers/textController'
@@ -7,6 +9,9 @@ import { AppDataSource } from './config/dataSource'
 
 const textStorage = new TextStorage()
 const textController = new TextController(textStorage)
+const swaggerDocument = yaml.load('src/docs/swagger.yaml')
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function main () {
@@ -21,7 +26,7 @@ async function main () {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-app.get('/add-text', textController.addText.bind(textController))
+app.post('/add-text', textController.addText.bind(textController))
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.delete('/delete-text/:id', textController.deleteText.bind(textController))
 

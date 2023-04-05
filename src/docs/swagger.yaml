@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: Add Text API
+  version: 1.0.0
+  description: API para agregar texto a una base de datos
+servers:
+  - url: http://localhost:3000/
+paths:
+  /add-text:
+    post:
+      summary: Agrega texto a la base de datos
+      description: Endpoint para agregar texto a la base de datos
+      requestBody:
+        description: JSON con la información del texto a agregar
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Texto a agregar
+                page:
+                  type: integer
+                  description: Número de la página
+                size:
+                  type: integer
+                  description: Cantidad de registros a retornar
+              required:
+                - text
+      responses:
+        '200':
+          description: Operación exitosa
+        '400':
+          description: Error en la petición
+        '500':
+          description: Error en el servidor
+
+  /delete-text/{id}:
+    delete:
+      summary: Elimina un texto de la base de datos
+      description: Endpoint para eliminar un texto de la base de datos por su ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del texto a eliminar
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID del texto eliminado
+                    text:
+                      type: string
+                      description: Texto eliminado
+                    date:
+                      type: string
+                      description: Fecha en que se eliminó el texto
+        '400':
+          description: Error en la petición
+        '500':
+          description: Error en el servidor
