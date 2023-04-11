@@ -1,6 +1,6 @@
-# Backend Prueba Talenta
+# Backend Prueba Postgres
 
-Este es el proyecto de Backend de la Prueba Técnica para el proceso de selección en Talenta. Está construido con [Node.js](https://nodejs.org/) y [TypeScript](https://www.typescriptlang.org/), utilizando diferentes herramientas para la ejecución de scripts.
+Este es el proyecto de Backend usando postgres con TypeORM. Está construido con [Node.js](https://nodejs.org/) y [TypeScript](https://www.typescriptlang.org/), utilizando diferentes herramientas para la ejecución de scripts.
 
 ## Requisitos previos
 
