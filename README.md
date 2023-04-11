@@ -1,4 +1,4 @@
-# Backend Prueba Postgres
+# Backend usando postgres con TypeORM
 
 Este es el proyecto de Backend usando postgres con TypeORM. Está construido con [Node.js](https://nodejs.org/) y [TypeScript](https://www.typescriptlang.org/), utilizando diferentes herramientas para la ejecución de scripts.
 
